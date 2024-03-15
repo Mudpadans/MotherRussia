@@ -4,4 +4,4 @@ const { translateText } = require('../controller.js')
 
 router.post('/translate', translateText)
 
-module.exports = router;
+module.exports = router
