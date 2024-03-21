@@ -1,7 +1,7 @@
 require('dotenv').config({ path: '../.env'}) 
 const express = require('express')
 const cors = require('cors')
-const translationRoutes = require('./routes/translationRoutes')
+// const translationRoutes = require('./routes/translationRoutes')
 const OpenAI = require('openai')
 
 const app = express()
@@ -14,14 +14,19 @@ const openai = new OpenAI({
 app.use(express.json());
 app.use(cors());
 
-app.get('/getResponse', async (req, res) => {
+app.post('/getResponse', async (req, res) => {
     try {
+        const userPrompt=req.body.userPrompt
+        if (!userPrompt) {
+            return res.status(400).send("userPrompt is required")
+        }
+
         const response = await openai.chat.completions.create({
-            model: 'gpt-4-0125-preview',
-            message: [{"role":"user", "content":"Russian greetings"}],
+            model: 'gpt-3.5-turbo',
+            messages: [{"role":"user", "content":userPrompt}],
             max_tokens: 100,
         })
-        console.log(response)
+        console.log(response.choices[0].message.content)
         res.json(response.data)
     } catch (error) {
         console.error('Something went wrong', error)
@@ -29,7 +34,7 @@ app.get('/getResponse', async (req, res) => {
     }
 })
 
-app.use('/api', translationRoutes)
+// app.use('/api', translationRoutes)
 
 app.listen(PORT, function(error) {
     if (error) {
