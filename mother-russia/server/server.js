@@ -14,7 +14,7 @@ const openai = new OpenAI({
 app.use(express.json());
 app.use(cors());
 
-app.post('/getResponse', async (req, res) => {
+app.post('/translate', async (req, res) => {
     try {
         const userPrompt=req.body.userPrompt
         if (!userPrompt) {

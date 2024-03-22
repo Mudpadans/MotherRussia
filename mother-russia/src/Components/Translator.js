@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
+import './Translator.css'
 
 function Translator() {
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState(''); 
   const [translation, setTranslation] = useState('');
 
   const handleTranslate = async () => {
@@ -27,6 +28,7 @@ function Translator() {
     <section id="translator-background">
         <div id="translator">
           <textarea 
+            name="Translation"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             placeholder="translate into Russian or English"
