@@ -34,3 +34,7 @@
     bottom: 10px;
     z-index: 1;
   }
+
+  #translation {
+    color: white
+  }

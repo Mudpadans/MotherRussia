@@ -26,7 +26,7 @@ app.post('/translate', async (req, res) => {
             messages: [{"role":"user", "content":userPrompt}],
             max_tokens: 100,
         })
-        console.log(response.choices[0].message.content)
+        console.log(response.data)
         res.json(response.data)
     } catch (error) {
         console.error('Something went wrong', error)

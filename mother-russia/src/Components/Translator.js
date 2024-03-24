@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
-import './Translator.css'
+import React, {useState} from 'react';
+import axios from 'axios';
+import './Translator.css';
 
 function Translator() {
   const [inputText, setInputText] = useState(''); 
@@ -7,20 +8,13 @@ function Translator() {
 
   const handleTranslate = async () => {
     try {
-      const response = await fetch('/translate', {
-        method: 'POST', 
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ prompt: inputText })
+      const response = await axios.post('http://localhost:1800/translate', {
+        userPrompt: inputText
       });
-      if (!response.ok) {
-        throw new Error(`Network error: ${response.status}`)
-      }
-      const data = await response.json();
-      setTranslation(data.translation);
+      console.log(response)
+      setTranslation(response.data.choices[0].text);
     } catch (error) {
-      console.error('Fetch error:', error)
+      console.error('Fetch error:', error.response ? error.response.data : error.message)
     }
   };  
   
@@ -34,7 +28,7 @@ function Translator() {
             placeholder="translate into Russian or English"
           ></textarea>
           <button onClick={handleTranslate} id="translator-btn">Translate</button>
-          <div>
+          <div id="translation">
             <p>Translation:</p>
             <p>{translation}</p>
           </div>
