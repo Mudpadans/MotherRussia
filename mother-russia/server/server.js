@@ -20,16 +20,29 @@ app.post('/translate', async (req, res) => {
         return res.status(400).send("userPrompt is required")
     }
 
+    const likelyLanguage = userPrompt.match(/[а-яА-Я]/) ? 'Russian' : 'English'
+
+    const translationPrompt = likelyLanguage === 'English'
+        ? `Translate the following English text into Russian: ${userPrompt}`
+        : `Переведите следующий русский текст на английский: ${userPrompt}`
+
     try {
         const response = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo',
+            model: 'gpt-4',
             messages: [
-                {role: 'user', content: userPrompt}
+                {role: 'system', content: "You are a bilingual Russian-English translator."},
+                {role: 'user', content: translationPrompt}
             ],
             max_tokens: 100,
         });
-        const translation = response.choices[0].message.content
-        console.log((JSON.stringify(response.choices[0].message.content)))
+        let translation = response.choices[0].message.content.trim()
+
+        const instructionEnglish = "Translate the following Russian text into English:";
+        if (likelyLanguage === 'Russian' && translation.startsWith(instructionEnglish)) {
+            translation = translation.substring(instructionEnglish.length).trim();
+        }
+
+        console.log((JSON.stringify(response.choices[0].message)))
         res.json({ translation })
     } catch (error) {
         console.error('OpenAI request error', error)
