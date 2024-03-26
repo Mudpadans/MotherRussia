@@ -1,8 +1,10 @@
-require('dotenv').config({ path: '../.env'})  
+require('dotenv').config({ path: '../.env'})   
 const express = require('express')
 const cors = require('cors')
 // const translationRoutes = require('./routes/translationRoutes')
 const { OpenAI } = require('openai')
+const fs = require('fs').promises
+const path = require('path')
 
 const app = express()
 app.use(express.json());
@@ -23,12 +25,12 @@ app.post('/translate', async (req, res) => {
     const likelyLanguage = userPrompt.match(/[а-яА-Я]/) ? 'Russian' : 'English'
 
     const translationPrompt = likelyLanguage === 'English'
-        ? `Translate the following English text into Russian: ${userPrompt}`
-        : `Переведите следующий русский текст на английский: ${userPrompt}`
+        ? `Translate the following English text into Russian with a English way to it in parentheses: ${userPrompt}`
+        : `Translate the following Russian text into English with a Russian way to it in parentheses: ${userPrompt}`
 
     try {
         const response = await openai.chat.completions.create({
-            model: 'gpt-4',
+            model: 'gpt-4-turbo-preview',
             messages: [
                 {role: 'system', content: "You are a bilingual Russian-English translator."},
                 {role: 'user', content: translationPrompt}
@@ -37,7 +39,7 @@ app.post('/translate', async (req, res) => {
         });
         let translation = response.choices[0].message.content.trim()
 
-        const instructionEnglish = "Translate the following Russian text into English:";
+        const instructionEnglish = "Translate the following Russian text into English with a Russian way to it in parentheses:";
         if (likelyLanguage === 'Russian' && translation.startsWith(instructionEnglish)) {
             translation = translation.substring(instructionEnglish.length).trim();
         }
