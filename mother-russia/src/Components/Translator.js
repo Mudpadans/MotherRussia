@@ -5,35 +5,49 @@ import './Translator.css';
 function Translator() {
   const [inputText, setInputText] = useState(''); 
   const [translation, setTranslation] = useState('');
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+ 
   const handleTranslate = async () => {
+    setIsLoading(true);
+    setError('')
     try {
       const response = await axios.post('http://localhost:1800/translate', {
         userPrompt: inputText
       });
       console.log(response)
-      setTranslation(response.data.choices[0].text);
+      setTranslation(response.data.translation);
     } catch (error) {
-      console.error('Fetch error:', error.response ? error.response.data : error.message)
+      setError('Failed to fetch error.')
+      console.error('Fetch error:', error)
+    } finally {
+      setIsLoading(false)
     }
   };  
   
   return (
-    <section id="translator-background">
-        <div id="translator">
-          <textarea 
-            name="Translation"
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            placeholder="translate into Russian or English"
-          ></textarea>
-          <button onClick={handleTranslate} id="translator-btn">Translate</button>
-          <div id="translation">
-            <p>Translation:</p>
-            <p>{translation}</p>
+    <div>
+      <section id="translator-background">
+          <div id="translator">
+            <textarea 
+              name="Translation"
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              placeholder="translate into Russian or English"
+              disabled={isLoading}
+            ></textarea>
+            <button onClick={handleTranslate} id="translator-btn">Translate</button>
+            {isLoading ? 'Translating...' : 'Translate'} 
+            
           </div>
-        </div>
       </section>
+      <section>
+          <div id="translation">
+              <p>Translation:</p>
+              <p>{translation}</p>
+            </div>
+      </section>
+    </div>
   )
 }
 

@@ -1,36 +1,39 @@
-require('dotenv').config({ path: '../.env'}) 
+require('dotenv').config({ path: '../.env'})  
 const express = require('express')
 const cors = require('cors')
 // const translationRoutes = require('./routes/translationRoutes')
-const OpenAI = require('openai')
+const { OpenAI } = require('openai')
 
 const app = express()
+app.use(express.json());
+app.use(cors());
+ 
 const PORT = process.env.PORT
 const APIKey = process.env.APIKEY
 const openai = new OpenAI({
     apiKey: APIKey
 })
 
-app.use(express.json());
-app.use(cors());
-
 app.post('/translate', async (req, res) => {
-    try {
-        const userPrompt=req.body.userPrompt
-        if (!userPrompt) {
-            return res.status(400).send("userPrompt is required")
-        }
+    const userPrompt=req.body.userPrompt
+    if (!userPrompt) {
+        return res.status(400).send("userPrompt is required")
+    }
 
+    try {
         const response = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
-            messages: [{"role":"user", "content":userPrompt}],
+            messages: [
+                {role: 'user', content: userPrompt}
+            ],
             max_tokens: 100,
-        })
-        console.log(response.data)
-        res.json(response.data)
+        });
+        const translation = response.choices[0].message.content
+        console.log((JSON.stringify(response.choices[0].message.content)))
+        res.json({ translation })
     } catch (error) {
-        console.error('Something went wrong', error)
-        res.status(500).send('Error with OpenAI request')
+        console.error('OpenAI request error', error)
+        res.status(500).send('Failed to fetch translation')
     }
 })
 
