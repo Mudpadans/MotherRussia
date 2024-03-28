@@ -3,7 +3,7 @@ const express = require('express')
 const cors = require('cors')
 // const translationRoutes = require('./routes/translationRoutes')
 const { OpenAI } = require('openai')
-const fs = require('fs').promises
+const fs = require('fs')
 const path = require('path')
 
 const app = express()
@@ -15,6 +15,8 @@ const APIKey = process.env.APIKEY
 const openai = new OpenAI({
     apiKey: APIKey
 })
+
+const speechFile = path.resolve("./speech.mp3")
 
 app.post('/translate', async (req, res) => {
     const userPrompt=req.body.userPrompt
@@ -49,6 +51,31 @@ app.post('/translate', async (req, res) => {
     } catch (error) {
         console.error('OpenAI request error', error)
         res.status(500).send('Failed to fetch translation')
+    }
+})
+
+app.post('/text-to-speech', async (req, res) => {
+    const { text } = req.body
+    if (!text) {
+        return res.status(400).send("text is required")
+    }
+
+    try {
+        const audioResponse = await openai.audio.speech.create({
+            model: "tts-1",
+            voice: "alloy",
+            input: text
+        })
+
+        console.log(speechFile)
+
+        const buffer = Buffer.from(await audioResponse.arrayBuffer())
+
+        await fs.promises.writeFile(speechFile, buffer)
+        console.log(audioResponse)
+    } catch (error) {
+        console.error('OpenAI TTS request error', error);
+        res.status(500).send('Failed to synthesize speech')
     }
 })
 

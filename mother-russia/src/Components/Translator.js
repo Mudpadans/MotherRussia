@@ -24,6 +24,24 @@ function Translator() {
       setIsLoading(false)
     }
   };  
+
+  const handleAudio = async () => {
+    setIsLoading(true);
+    setError('')
+    try {
+      const response = await axios.post('http://localhost:1800/text-to-speech', 
+      { text: translation },
+      { responseType: 'blob' });
+      const audioURL = URL.createObjectURL(response.data)
+      const audio = new Audio(audioURL)
+      audio.play()
+    } catch (error) {
+      setError('Failed to fetch error.')
+      console.error('Fetch error:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
   
   return (
     <div>
@@ -45,6 +63,9 @@ function Translator() {
           <div id="translation">
               <p>Translation:</p>
               <p>{translation}</p>
+              {/* audio */}
+              <button onClick={handleAudio} disabled={isLoading}>Play</button>
+              {error && <p>{error}</p>}
             </div>
       </section>
     </div>
