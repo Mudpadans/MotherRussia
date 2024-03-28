@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import './Translator.css';
 
@@ -7,6 +7,7 @@ function Translator() {
   const [translation, setTranslation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const audioRef = useRef(null)
  
   const handleTranslate = async () => {
     setIsLoading(true);
@@ -63,8 +64,11 @@ function Translator() {
           <div id="translation">
               <p>Translation:</p>
               <p>{translation}</p>
-              {/* audio */}
-              <button onClick={handleAudio} disabled={isLoading}>Play</button>
+              {translation && (
+                <>
+                  <button onClick={handleAudio} disabled={isLoading}>Play</button>
+                </>
+              )}
               {error && <p>{error}</p>}
             </div>
       </section>

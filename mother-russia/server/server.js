@@ -8,6 +8,7 @@ const path = require('path')
 
 const app = express()
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../Translator.js')))
 app.use(cors());
  
 const PORT = process.env.PORT
@@ -27,8 +28,8 @@ app.post('/translate', async (req, res) => {
     const likelyLanguage = userPrompt.match(/[а-яА-Я]/) ? 'Russian' : 'English'
 
     const translationPrompt = likelyLanguage === 'English'
-        ? `Translate the following English text into Russian with a English way to it in parentheses: ${userPrompt}`
-        : `Translate the following Russian text into English with a Russian way to it in parentheses: ${userPrompt}`
+        ? `Translate the following English text into Russian with a English way to pronounce it in parentheses: ${userPrompt}`
+        : `Translate the following Russian text into English with a Russian way to pronounce it in parentheses: ${userPrompt}`
 
     try {
         const response = await openai.chat.completions.create({
@@ -41,7 +42,7 @@ app.post('/translate', async (req, res) => {
         });
         let translation = response.choices[0].message.content.trim()
 
-        const instructionEnglish = "Translate the following Russian text into English with a Russian way to it in parentheses:";
+        const instructionEnglish = "Translate the following Russian text into English with a Russian way to pronounce it in parentheses:";
         if (likelyLanguage === 'Russian' && translation.startsWith(instructionEnglish)) {
             translation = translation.substring(instructionEnglish.length).trim();
         }
