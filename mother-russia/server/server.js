@@ -8,7 +8,6 @@ const path = require('path')
 
 const app = express()
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../Translator.js')))
 app.use(cors());
  
 const PORT = process.env.PORT
@@ -17,7 +16,8 @@ const openai = new OpenAI({
     apiKey: APIKey
 })
 
-const speechFile = path.resolve("./speech.mp3")
+app.use(express.static(path.join(__dirname, "../build")))
+const speechFile = path.join(__dirname, "speech.mp3");
 
 app.post('/translate', async (req, res) => {
     const userPrompt=req.body.userPrompt
@@ -68,16 +68,20 @@ app.post('/text-to-speech', async (req, res) => {
             input: text
         })
 
-        console.log(speechFile)
-
         const buffer = Buffer.from(await audioResponse.arrayBuffer())
 
         await fs.promises.writeFile(speechFile, buffer)
         console.log(audioResponse)
+        console.log(speechFile)
     } catch (error) {
         console.error('OpenAI TTS request error', error);
         res.status(500).send('Failed to synthesize speech')
     }
+})
+
+app.get('/audio', (req, res) => {
+    console.log(`Serving audio from: ${speechFile}`)
+    res.sendFile(speechFile)
 })
 
 // app.use('/api', translationRoutes)
