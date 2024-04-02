@@ -13,6 +13,10 @@ function Translator() {
     setIsLoading(true);
     setError('');
 
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); 
+
     try {
       const response = await axios.post('/translate', {
         userPrompt: inputText
@@ -37,6 +41,7 @@ function Translator() {
       setError('Failed to fetch error.')
       console.error('Fetch error:', error)
     } finally {
+      console.log("loading")
       setIsLoading(false)
     }
   };  
@@ -66,6 +71,9 @@ function Translator() {
                   <audio ref={audioRef} src="/audio" controls/>
                 </>
               )}
+              <button onClick={() => { setInputText(''); setTranslation(''); }} disabled={isLoading}>
+                    Clear
+                  </button>
               {error && <p>{error}</p>}
             </div>
       </section>
