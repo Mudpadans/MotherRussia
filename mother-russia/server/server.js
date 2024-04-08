@@ -62,6 +62,10 @@ app.post('/text-to-speech', async (req, res) => {
     }
 
     try {
+        if (fs.existsSync(speechFile)) {
+            await fs.promises.unlink(speechFile)
+        }
+
         const audioResponse = await openai.audio.speech.create({
             model: "tts-1",
             voice: "alloy",
@@ -70,9 +74,15 @@ app.post('/text-to-speech', async (req, res) => {
 
         const buffer = Buffer.from(await audioResponse.arrayBuffer())
 
-        await fs.promises.writeFile(speechFile, buffer)
+        try {
+            await fs.promises.writeFile(speechFile, buffer)
+        } catch (error) {
+            console.error('Error writing speech file', error)
+            res.status(500).send('Failed to write speech file')
+        }
+        
         console.log(audioResponse)
-        console.log(speechFile)
+        console.log(`New speech file created: ${speechFile}`)
     } catch (error) {
         console.error('OpenAI TTS request error', error);
         res.status(500).send('Failed to synthesize speech')

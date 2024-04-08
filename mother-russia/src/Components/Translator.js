@@ -18,7 +18,7 @@ function Translator() {
     }, 2000); 
 
     try {
-      const response = await axios.post('/translate', {
+      const response = await axios.post('http:/localhost:1800/translate', {
         userPrompt: inputText
       });
 
@@ -27,12 +27,12 @@ function Translator() {
       let translatedText = response.data.translation
       setTranslation(translatedText);
 
-      await axios.post('/text-to-speech', {
+      await axios.post('http:/localhost:1800/text-to-speech', {
         text: translatedText
       })
 
       if (audioRef.current) {
-        let newSrc = `/audio?cb=${Date.now()}`;
+        let newSrc = `http://localhost:1800/audio?cb=${Date.now()}`;
         audioRef.current.src = newSrc;
         console.log(audioRef)
         audioRef.current.load()
