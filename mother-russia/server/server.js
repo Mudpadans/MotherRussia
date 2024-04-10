@@ -28,8 +28,8 @@ app.post('/translate', async (req, res) => {
     const likelyLanguage = userPrompt.match(/[а-яА-Я]/) ? 'Russian' : 'English'
 
     const translationPrompt = likelyLanguage === 'English'
-        ? `Translate the following English text into Russian with a English way to pronounce it in parentheses: ${userPrompt}`
-        : `Translate the following Russian text into English with a Russian way to pronounce it in parentheses: ${userPrompt}`
+        ? `Translate the following English text into Russian: ${userPrompt}`
+        : `Translate the following Russian text into English: ${userPrompt}`
 
     try {
         const response = await openai.chat.completions.create({
@@ -42,7 +42,7 @@ app.post('/translate', async (req, res) => {
         });
         let translation = response.choices[0].message.content.trim()
 
-        const instructionEnglish = "Translate the following Russian text into English with a Russian way to pronounce it in parentheses:";
+        const instructionEnglish = "Translate the following Russian text into English:";
         if (likelyLanguage === 'Russian' && translation.startsWith(instructionEnglish)) {
             translation = translation.substring(instructionEnglish.length).trim();
         }
@@ -68,7 +68,7 @@ app.post('/text-to-speech', async (req, res) => {
 
         const audioResponse = await openai.audio.speech.create({
             model: "tts-1",
-            voice: "alloy",
+            voice: "nova",
             input: text
         })
 
@@ -76,13 +76,12 @@ app.post('/text-to-speech', async (req, res) => {
 
         try {
             await fs.promises.writeFile(speechFile, buffer)
+            console.log(`New speech file created: ${speechFile}`)
+            res.send({ success: true })
         } catch (error) {
             console.error('Error writing speech file', error)
             res.status(500).send('Failed to write speech file')
         }
-        
-        console.log(audioResponse)
-        console.log(`New speech file created: ${speechFile}`)
     } catch (error) {
         console.error('OpenAI TTS request error', error);
         res.status(500).send('Failed to synthesize speech')
@@ -90,8 +89,14 @@ app.post('/text-to-speech', async (req, res) => {
 })
 
 app.get('/audio', (req, res) => {
-    console.log(`Serving audio from: ${speechFile}`)
-    res.sendFile(speechFile)
+    try {
+        console.log(`Serving audio from: ${speechFile}`)
+        res.sendFile(speechFile)
+    } catch (error) {
+        console.error("Error requesting speech file")
+        res.status(500).send('Failed to get speech File')
+    }
+        
 })
 
 // app.use('/api', translationRoutes)

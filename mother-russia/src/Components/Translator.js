@@ -1,42 +1,42 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import './Translator.css';
 
 function Translator() {
-  const [inputText, setInputText] = useState(''); 
+  const [inputText, setInputText] = useState('');  
   const [translation, setTranslation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isAudioLoading, setIsAudioLoading] = useState(false);
   const [error, setError] = useState('');
   const audioRef = useRef(null)
+
+  useEffect(() => {
+    if (!isAudioLoading && translation) {
+      handleAudio();
+    }
+  }, [isAudioLoading, translation])
  
   const handleTranslate = async () => {
     setIsLoading(true);
     setError('');
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000); 
+    setIsAudioLoading(true)
 
     try {
-      const response = await axios.post('http:/localhost:1800/translate', {
+      const response = await axios.post('/translate', {
         userPrompt: inputText
       });
-
-      console.log(response)
 
       let translatedText = response.data.translation
       setTranslation(translatedText);
 
-      await axios.post('http:/localhost:1800/text-to-speech', {
+      
+      const ttsResponse = await axios.post('/text-to-speech', {
         text: translatedText
-      })
+      });
+      console.log(ttsResponse)
 
-      if (audioRef.current) {
-        let newSrc = `http://localhost:1800/audio?cb=${Date.now()}`;
-        audioRef.current.src = newSrc;
-        console.log(audioRef)
-        audioRef.current.load()
-      }
+      setIsAudioLoading(false)
+         
     } catch (error) {
       setError('Failed to fetch error.')
       console.error('Fetch error:', error)
@@ -45,6 +45,14 @@ function Translator() {
       setIsLoading(false)
     }
   };  
+
+  const handleAudio = () => {
+    if (audioRef.current) {
+      let newSrc = `/audio?cb=${Date.now()}`;
+      audioRef.current.src = newSrc;
+      audioRef.current.load()
+    }
+  }
   
   return (
     <div>
@@ -58,7 +66,7 @@ function Translator() {
               disabled={isLoading}
             ></textarea>
             <button onClick={handleTranslate} id="translator-btn">Translate</button>
-            {isLoading ? 'Translating...' : 'Translate'} 
+            {isLoading && <p>Translating...</p>} 
             
           </div>
       </section>
@@ -68,12 +76,13 @@ function Translator() {
               <p>{translation}</p>
               {translation && (
                 <>
-                  <audio ref={audioRef} src="/audio" controls/>
+                  {isAudioLoading ? (
+                    <p>Audio is loading...</p>
+                  ) : (
+                    <audio ref={audioRef} disabled={!translation} controls/>
+                  )}
                 </>
               )}
-              <button onClick={() => { setInputText(''); setTranslation(''); }} disabled={isLoading}>
-                    Clear
-                  </button>
               {error && <p>{error}</p>}
             </div>
       </section>
