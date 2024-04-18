@@ -1,12 +1,10 @@
 import React from 'react';
-import axios from 'axios';
-import './WordLists.css'
+import './BasicWordList.css';
 
-function WordLists() {
-
+function BasicWordList() {
     return (
         <div>
-            <h1>Wordlists</h1>
+            <h1>Basic Vocabulary Lists</h1>
                 <h2>Greetings & Expressions</h2>
                     <ul>
                         <li>Hello - Здравствуйте (Zdravstvuytye) [formal]; Привет (Privyet) [informal]</li>
@@ -334,4 +332,4 @@ function WordLists() {
     )
 }
 
-export default WordLists
+export default BasicWordList;

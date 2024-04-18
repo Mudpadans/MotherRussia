@@ -2,11 +2,12 @@
 import React from 'react'
 import './App.css';
 import Translator from './Components/Translator';
-import WordLists from './Components/WordLists';
+import WordListsMain from './Components/WordListsMain';
+import BasicWordList from './Components/Wordlists/BasicWordList';
 // import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 
-// import WordLists from './Components/WordLists'
+
 
 function App() {
 
@@ -24,7 +25,7 @@ function App() {
         </header>
         <Routes>
           <Route path="/" element={<Translator />}/>
-          <Route path="/Wordlists" element={<WordLists />}/>
+          <Route path="/Wordlists" element={<WordListsMain />}/>
         </Routes>
             
       </div>
