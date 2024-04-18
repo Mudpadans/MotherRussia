@@ -72,7 +72,7 @@ function Translator() {
       </section>
       <section>
           <div id="translation">
-              <p>Translation:</p>
+              <p>(AI) Translation:</p>
               <p>{translation}</p>
               {translation && (
                 <>
