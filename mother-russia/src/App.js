@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import './App.css';
 import Translator from './Components/Translator';
 import BasicWordList from './Components/Wordlists/BasicWordList';
@@ -10,6 +10,22 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 
 function App() {
   const [showDropdown, setShowDropdown] = useState(false);
+  const dropDownRef = useRef(null)
+
+  const toggleDropdown = () => setShowDropdown(!showDropdown)
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
+        setShowDropdown(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [dropDownRef])
 
   return (
     <Router>
@@ -18,8 +34,8 @@ function App() {
           <h2>MotherRussia.com</h2>
           <nav>
             <Link to="/"><h2>Home</h2></Link>
-            <div class='dropdown'>
-              <Link onClick={() => setShowDropdown(!showDropdown)}>
+            <div class='dropdown' ref={dropDownRef}>
+              <Link onClick={toggleDropdown}>
                 <h2>Word Lists</h2>
               </Link>
               {showDropdown && (
