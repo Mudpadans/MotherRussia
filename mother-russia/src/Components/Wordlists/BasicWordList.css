@@ -1,4 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+h2 {
+    color: #333;
+    margin-top: 20px;
+}
+
 ul {
     list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.formal {
+    color: #0000FF;
+    font-style: italic;
+    margin-left: 10px;
+}
+
+.informal {
+    color: #FF0000;
+    font-style: italic;
+    margin-left: 10px;
 }
 

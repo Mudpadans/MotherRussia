@@ -1,5 +1,5 @@
-export const wordLists = {
-    greetingExpressions: [
+export const basicWordLists = {
+    greetingsExpressions: [
         { english: "Hello", russian: "Здравствуйте", transliteration: "Zdravstvuytye", type: "formal" },
         { english: "Hello", russian: "Привет", transliteration: "Privyet", type: "informal" },
         { english: "Goodbye", russian: "До свидания", transliteration: "Do svidaniya", type: "formal" },
@@ -129,8 +129,8 @@ export const wordLists = {
         { english: "Daughter", russian: "Дочь", transliteration: "Doch" },
         { english: "Uncle", russian: "Дядя", transliteration: "Dyadya" },
         { english: "Aunt", russian: "Тетя", transliteration: "Tetya" },
-        { english: "Cousin (male)", russian: "Двоюродный брат", transliteration: "Dvoyurodnyy brat" },
-        { english: "Cousin (female)", russian: "Двоюродная сестра", transliteration: "Dvoyurodnaya sestra" },
+        { english: "Cousin", russian: "Двоюродный брат", transliteration: "Dvoyurodnyy brat", gender: 'male' },
+        { english: "Cousin", russian: "Двоюродная сестра", transliteration: "Dvoyurodnaya sestra", gender: 'female' },
         { english: "Nephew", russian: "Племянник", transliteration: "Plemiannik" },
         { english: "Niece", russian: "Племянница", transliteration: "Plemiannitsa" },
         { english: "Wife", russian: "Жена", transliteration: "Zhena" },
@@ -328,4 +328,50 @@ export const wordLists = {
         { english: "Is it cold outside?", russian: "На улице холодно?", transliteration: "Na ulitse kholodno?" },
     ]
     
+};
+
+export const intermediateWordLists = {
+    travelAndTransportation: {
+        airportAndTrainStation: [
+            { english: "Airport", russian: "Аэропорт", transliteration: "Aeroport" },
+            { english: "Train Station", russian: "Вокзал", transliteration: "Vokzal" },
+            { english: "Ticket", russian: "Билет", transliteration: "Bilet" },
+            { english: "Passport", russian: "Паспорт", transliteration: "Pasport" },
+            { english: "Luggage", russian: "Багаж", transliteration: "Bagazh" },
+            { english: "Departure", russian: "Отправление", transliteration: "Otpravlenie" },
+            { english: "Arrival", russian: "Прибытие", transliteration: "Pribytie" },
+            { english: "Check-In", russian: "Регистрация", transliteration: "Registratsiya" },
+            { english: "Customs", russian: "Таможня", transliteration: "Tamozhnya" },
+            { english: "Security Check", russian: "Контроль безопасности", transliteration: "Kontrol' bezopasnosti" },
+            { english: "Gate", russian: "Выход на посадку", transliteration: "Vykhod na posadku" },
+            { english: "Boarding", russian: "Посадка", transliteration: "Posadka" },
+            { english: "Flight", russian: "Рейс", transliteration: "Reys" },
+            { english: "Delayed", russian: "Задержан", transliteration: "Zaderzhan" },
+            { english: "Cancelled", russian: "Отменен", transliteration: "Otmenen" },
+        ],
+        commonPhrasesForBuyingTickets: [
+            { english: "One ticket to Moscow, please.", russian: "Один билет до Москвы, пожалуйста.", transliteration: "Odin bilet do Moskvy, pozhaluysta." },
+            { english: "Where can I buy a ticket?", russian: "Где я могу купить билет?", transliteration: "Gde ya mogu kupit' bilet?" },
+            { english: "Is this seat available?", russian: "Это место свободно?", transliteration: "Eto mesto svobodno?" },
+            { english: "I’d like to book a seat by the window.", russian: "Я бы хотел забронировать место у окна.", transliteration: "Ya by khotel zabronirovat' mesto u okna." },
+        ],
+        vocabularyForAskingForDirections: [
+            { english: "Where is...?", russian: "Где находится...?", transliteration: "Gde nakhoditsya...?" },
+            { english: "How do I get to...?", russian: "Как мне добраться до...?", transliteration: "Kak mne dobratsya do...?" },
+            { english: "Is it far?", russian: "Это далеко?", transliteration: "Eto daleko?" },
+            { english: "To the left.", russian: "Налево.", transliteration: "Nalevo." },
+            { english: "To the right.", russian: "Направо.", transliteration: "Napravo." },
+            { english: "Straight ahead.", russian: "Прямо.", transliteration: "Pryamo." },
+            { english: "Map", russian: "Карта", transliteration: "Karta" },
+        ],
+        commonPhrasesUsedDuringTravel: [
+            { english: "Can you show me on the map?", russian: "Можете показать на карте?", transliteration: "Mozhete pokazat' na karte?" },
+            { english: "I need a taxi.", russian: "Мне нужно такси.", transliteration: "Mne nuzhno taksi." },
+            { english: "How much does it cost?", russian: "Сколько это стоит?", transliteration: "Skol'ko eto stoit?" },
+            { english: "Please stop here.", russian: "Остановитесь здесь, пожалуйста.", transliteration: "Ostanovites' zdes', pozhaluysta." },
+            { english: "I am lost.", russian: "Я потерялся.", transliteration: "Ya poteryalsya/poteryalas'.", gender: "male"},
+            { english: "I am lost.", russian: "Я потерялась.", transliteration: "Ya poteryalsya/poteryalas'.", gender: "female" },
+            { english: "Does this train/bus go to...?", russian: "Этот поезд/автобус идет до...?", transliteration: "Etot poyezd/avtobus idet do...?" },
+        ],
+    },
 }
