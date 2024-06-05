@@ -1,7 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './IntermediateWordList.css'
+import { intermediateWordLists } from './wordData';
 
 function IntermediateWordList() {
+    const [ visibleList, setVisibleList ] = useState(null);
+
+    const toggleList = (listName) => {
+        setVisibleList(visibleList === listName ? null : listName);
+    }
+
+    const renderWordList = (words) => {
+        return words.map((word, index) => {
+            <li key={index}>
+                {word.english} - {word.russian} ({word.transliteration})
+                {word.type && <span className={word.type}> ({word.type})</span>} 
+                {word.gender && <span className={word.gender}> ({word.gender})</span>}
+            </li>
+        })
+    }
+
     return (
         <div>
             <h1>Intermediate Vocabulary Lists</h1>
@@ -417,6 +434,32 @@ function IntermediateWordList() {
                             <li>Singer - Певец (Pevets)</li>
                             <li>Band - Группа (Gruppa)</li>
                             <li>Concert - Концерт (Kontsert)</li>
+                        </ul>
+                    <h3>Literature</h3>
+                        <ul>
+                            <li>Book - Книга (Kniga)</li>
+                            <li>Author - Автор (Avtor)</li>
+                            <li>Novel - Роман (Roman)</li>
+                            <li>Poetry - Поэзия (Poeziya)</li>
+                            <li>Chapter - Глава (Glava)</li>
+                            <li>Plot - Сюжет (Syuzhet)</li>
+                            <li>Character - Персонаж (Personazh)</li>
+                            <li>Edition - Издание (Izdanie)</li>
+                            <li>Publisher - Издатель (Izdatel')</li>
+                            <li>Literary critique - Литературная критика (Literaturnaya kritika)</li>
+                        </ul>
+                    <h3>Cultural Events</h3>
+                        <ul>
+                            <li>Exhibition - Выставка (Vystavka)</li>
+                            <li>Theater - Театр (Teatr)</li>
+                            <li>Performance - Спектакль (Spektakl')</li>
+                            <li>Festival - Фестиваль (Festival')</li>
+                            <li>Gallery - Галерея (Galereya)</li>
+                            <li>Art - Искусство (Iskusstvo)</li>
+                            <li>Sculpture - Скульптура (Skulptura)</li>
+                            <li>Dance - Танец (Tanets)</li>
+                            <li>Opera - Опера (Opera)</li>
+                            <li>Ballet - Балет (Ballet)</li>
                         </ul>
                 <h2>Food Preparation and Cooking</h2>
                 <h2>Holidays and Celebrations</h2>
