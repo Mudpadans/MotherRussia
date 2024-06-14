@@ -14,6 +14,7 @@ function BasicWordList() {
             <li key={index}>
                 {word.english} - {word.russian} ({word.transliteration})
                 {word.type && <span className={word.type}> ({word.type})</span>} 
+                {word.gender && <span className={word.gender}> ({word.gender})</span>} 
             </li>
         ))
     }
