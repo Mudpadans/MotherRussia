@@ -889,7 +889,6 @@ export const intermediateWordLists = {
             { english: "Confident", russian: "Уверенная", transliteration: "Uverennaya", gender: 'female' },
             { english: "Lonely", russian: "Одинокий", transliteration: "Odinokiy", gender: 'male' },
             { english: "Lonely", russian: "Одинокая", transliteration: "Odinokaya", gender: 'female' },
-
         ],
         relationships: [
             { english: "Friend", russian: "Друг", transliteration: "Drug" },

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './BasicWordList.css';
-import { basicWordLists } from './wordData'
+import { basicWordLists } from './wordData';
+// import Icons from '../SVGs/Icons'
 
 function BasicWordList() {
     const [ visibleList, setVisibleList ] = useState(null);
@@ -20,7 +21,7 @@ function BasicWordList() {
     }
 
     const categories = [
-        { name: 'Greetings & Expressions', list: 'greetingsExpressions' },
+        { name: 'Greetings & Expressions', list: 'greetingsExpressions', },
         { name: 'Numbers 1-100', list: 'numbers' },
         { name: 'Days of the Week', list: 'daysOfWeek' },
         { name: 'Months of the Year', list: 'monthsOfYear' },
@@ -47,7 +48,8 @@ function BasicWordList() {
             <h1>Basic Vocabulary Lists</h1>
             {categories.map((category, index) => (
                 <div key={index}>
-                    <h2 onClick={() => toggleList(category.list)} style={{cursor: 'pointer'}}>
+                    <h2 onClick={() => toggleList(category.list)}>
+                        {/* <img src={category.icon} alt={`${category.name} icon`} /> */}
                         {category.name}
                     </h2>
                     {visibleList === category.list && (
