@@ -5,7 +5,7 @@ import Translator from './Components/Translator';
 import BasicWordList from './Components/Wordlists/BasicWordList';
 import IntermediateWordList from './Components/Wordlists/IntermediateWordList';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
-
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
 function App() {

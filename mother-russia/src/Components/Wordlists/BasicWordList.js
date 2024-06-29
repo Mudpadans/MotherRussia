@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './BasicWordList.css';
 import { basicWordLists } from './wordData';
-import Icons from '../Icons/Icons'
 
 function BasicWordList() {
     const [ visibleList, setVisibleList ] = useState(null);
@@ -21,26 +20,26 @@ function BasicWordList() {
     }
 
     const categories = [
-        { name: 'Greetings & Expressions', list: 'greetingsExpressions', icon: Icons.GreetingsIcon },
-        { name: 'Numbers 1-100', list: 'numbers' },
-        { name: 'Days of the Week', list: 'daysOfWeek' },
-        { name: 'Months of the Year', list: 'monthsOfYear' },
-        { name: 'Phrases Related to Dates', list: 'phrasesRelatedToDates' },
-        { name: 'Colors', list: 'colors' },
-        { name: 'Family Members', list: 'familyMembers' },
-        { name: 'Common Occupations', list: 'commonOccupations' },
-        { name: 'Descriptions (Physical Attributes)', list: 'descriptions' },
-        { name: 'Common Verbs', list: 'commonVerbs' },
-        { name: 'Common Adjectives', list: 'commonAdjectives' },
-        { name: 'Foods', list: 'foods' },
-        { name: 'Drinks', list: 'drinks' },
-        { name: 'Phrases for Ordering at a Restaurant', list: 'phrasesForOrderingAtARestaurant' },
-        { name: 'Names of Places', list: 'namesOfPlaces' },
-        { name: 'Direction Words', list: 'directionWords' },
-        { name: 'Direction Phrases', list: 'directionPhrases' },
-        { name: 'Time-Related Words and Phrases', list: 'timeRelatedWordsAndPhrases' },
-        { name: 'Weather Terms and Descriptions', list: 'weatherTermsAndDescriptions' },
-        { name: 'Asking About Weather', list: 'askingAboutWeather' },
+        { name: 'Greetings & Expressions', list: 'greetingsExpressions', icon: 'fas fa-handshake' },
+        { name: 'Numbers 1-100', list: 'numbers', icon: 'fas fa-sort-numeric-up' },
+        { name: 'Days of the Week', list: 'daysOfWeek', icon: 'fas fa-calendar-day' },
+        { name: 'Months of the Year', list: 'monthsOfYear', icon: 'fas fa-calendar-alt' },
+        { name: 'Phrases Related to Dates', list: 'phrasesRelatedToDates', icon: 'fas fa-clock' },
+        { name: 'Colors', list: 'colors', icon: 'fas fa-palette' },
+        { name: 'Family Members', list: 'familyMembers', icon: 'fas fa-users' },
+        { name: 'Common Occupations', list: 'commonOccupations', icon: 'fas fa-briefcase' },
+        { name: 'Descriptions (Physical Attributes)', list: 'descriptions', icon: 'fas fa-user' },
+        { name: 'Common Verbs', list: 'commonVerbs', icon: 'fas fa-running' },
+        { name: 'Common Adjectives', list: 'commonAdjectives', icon: 'fas fa-ad' },
+        { name: 'Foods', list: 'foods', icon: 'fas fa-utensils' },
+        { name: 'Drinks', list: 'drinks', icon: 'fas fa-coffee' },
+        { name: 'Phrases for Ordering at a Restaurant', list: 'phrasesForOrderingAtARestaurant', icon: 'fas fa-concierge-bell' },
+        { name: 'Names of Places', list: 'namesOfPlaces', icon: 'fas fa-map-marker-alt' },
+        { name: 'Direction Words', list: 'directionWords', icon: 'fas fa-compass' },
+        { name: 'Direction Phrases', list: 'directionPhrases', icon: 'fas fa-directions' },
+        { name: 'Time-Related Words and Phrases', list: 'timeRelatedWordsAndPhrases', icon: 'fas fa-hourglass-half' },
+        { name: 'Weather Terms and Descriptions', list: 'weatherTermsAndDescriptions', icon: 'fas fa-cloud-sun' },
+        { name: 'Asking About Weather', list: 'askingAboutWeather', icon: 'fas fa-cloud' },
     ]
 
     return (
@@ -49,7 +48,7 @@ function BasicWordList() {
             {categories.map((category, index) => (
                 <div key={index}>
                     <h2 onClick={() => toggleList(category.list)}>
-                        <img src={category.icon} alt={`${category.name} icon`} />
+                        <i className={category.icon}></i>
                         {category.name}
                     </h2>
                     {visibleList === category.list && (
