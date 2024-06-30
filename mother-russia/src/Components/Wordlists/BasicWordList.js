@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './BasicWordList.css';
 import { basicWordLists } from './wordData';
 
 function BasicWordList() {
     const [ visibleList, setVisibleList ] = useState(null);
+    const audioRefs = useRef([])
 
     const toggleList = (listName) => {
         setVisibleList(visibleList === listName ? null : listName);
     };
+
+    const playAudio = (index) => {
+        if (audioRefs.current[index]) {
+            audioRefs.current[index].play()
+        }
+    }
 
     const renderWordList = (words) => {
         return words.map((word, index) => (
@@ -15,6 +22,14 @@ function BasicWordList() {
                 {word.english} - {word.russian} ({word.transliteration})
                 {word.type && <span className={word.type}> ({word.type})</span>} 
                 {word.gender && <span className={word.gender}> ({word.gender})</span>} 
+                {word.audio && (
+                    <button onClick={() => playAudio(index)}>
+                        <i className="fas fa-volume-up"></i>Play
+                    </button>
+                )}
+                {word.audio && (
+                    <audio ref={(el) => (audioRefs.current[index] = el)} src={word.audio} />
+                )}
             </li>
         ))
     }

@@ -1,6 +1,8 @@
 export const basicWordLists = {
     greetingsExpressions: [
-        { english: "Hello", russian: "Здравствуйте", transliteration: "Zdravstvuytye", type: "formal" },
+        { english: "Hello", russian: "Здравствуйте", transliteration: "Zdravstvuytye", type: "formal",
+            audio: "/audio/hello(formal).mp3"
+        },
         { english: "Hello", russian: "Привет", transliteration: "Privyet", type: "informal" },
         { english: "Goodbye", russian: "До свидания", transliteration: "Do svidaniya", type: "formal" },
         { english: "Goodbye", russian: "Пока", transliteration: "Poka", type: "informal" },
