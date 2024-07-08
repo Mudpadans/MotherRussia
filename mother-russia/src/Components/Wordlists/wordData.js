@@ -1,30 +1,70 @@
 export const basicWordLists = {
     greetingsExpressions: [
         { english: "Hello", russian: "Здравствуйте", transliteration: "Zdravstvuytye", type: "formal",
-            audio: "/audio/hello(formal).mp3"
+            audio: "/audio/basic/greetings/hello(formal).mp3"
         },
-        { english: "Hello", russian: "Привет", transliteration: "Privyet", type: "informal" },
-        { english: "Goodbye", russian: "До свидания", transliteration: "Do svidaniya", type: "formal" },
-        { english: "Goodbye", russian: "Пока", transliteration: "Poka", type: "informal" },
-        { english: "Yes", russian: "Да", transliteration: "Da" },
-        { english: "No", russian: "Нет", transliteration: "Nyet" },
-        { english: "Please", russian: "Пожалуйста", transliteration: "Pozhaluysta" },
-        { english: "You're Welcome", russian: "Пожалуйста", transliteration: "Pozhaluysta" },
-        { english: "Thank you", russian: "Спасибо", transliteration: "Spasibo" },
-        { english: "Sorry", russian: "Извините", transliteration: "Izvinite", type: "formal" },
-        { english: "Sorry", russian: "Прости", transliteration: "Prosti", type: "informal" },
-        { english: "Excuse me", russian: "Извините", transliteration: "Izvinite" },
-        { english: "How are you?", russian: "Как дела?", transliteration: "Kak dela?", type: "informal" },
-        { english: "How are you?", russian: "Как Вы?", transliteration: "Kak Vy?", type: "formal" },
-        { english: "What's your name?", russian: "Как тебя зовут?", transliteration: "Kak tebya zovut?", type: "informal" },
-        { english: "What's your name?", russian: "Как Вас зовут?", transliteration: "Kak Vas zovut?", type: "formal" },
-        { english: "Nice to meet you", russian: "Приятно познакомиться", transliteration: "Priyatno poznakomit'sya" },
-        { english: "I don't understand", russian: "Я не понимаю", transliteration: "Ya ne ponimayu" },
-        { english: "Could you repeat that?", russian: "Не могли бы вы повторить?", transliteration: "Ne mogli by vy povtorit?", type: "formal" },
-        { english: "Could you repeat that?", russian: "Можешь повторить?", transliteration: "Mozhesh' povtorit?", type: "informal" },
-        { english: "Where is the bathroom?", russian: "Где туалет?", transliteration: "Gde tualet?" },
+        { english: "Hello", russian: "Привет", transliteration: "Privyet", type: "informal",
+            audio: "/audio/basic/greetings/hello(informal).mp3"
+        },
+        { english: "Goodbye", russian: "До свидания", transliteration: "Do svidaniya", type: "formal",
+            audio: "/audio/basic/greetings/goodbye(formal).mp3"
+        },
+        { english: "Goodbye", russian: "Пока", transliteration: "Poka", type: "informal",
+            audio: "/audio/basic/greetings/goodbye(informal).mp3"
+        },
+        { english: "Yes", russian: "Да", transliteration: "Da",
+            audio: "/audio/basic/greetings/yes.mp3"
+        },
+        { english: "No", russian: "Нет", transliteration: "Nyet",
+            audio: "/audio/basic/greetings/no.mp3"
+        },
+        { english: "Please", russian: "Пожалуйста", transliteration: "Pozhaluysta", 
+            audio: "/audio/basic/greetings/please.mp3"
+        },
+        { english: "You're Welcome", russian: "Пожалуйста", transliteration: "Pozhaluysta",
+            audio: "/audio/basic/greetings/please.mp3"
+        },
+        { english: "Thank you", russian: "Спасибо", transliteration: "Spasibo",
+            audio: "/audio/basic/greetings/thankYou.mp3"
+        },
+        { english: "Sorry", russian: "Извините", transliteration: "Izvinite", type: "formal",
+            audio: "/audio/basic/greetings/sorry(formal).mp3"
+        },
+        { english: "Sorry", russian: "Прости", transliteration: "Prosti", type: "informal",
+            audio: "/audio/basic/greetings/sorry(informal).mp3"
+        },
+        { english: "Excuse me", russian: "Извините", transliteration: "Izvinite",
+            audio: "/audio/basic/greetings/sorry(formal).mp3"
+        },
+        { english: "How are you?", russian: "Как дела?", transliteration: "Kak dela?", type: "informal",
+            audio: "/audio/basic/greetings/howAreYou(informal).mp3"
+        },
+        { english: "How are you?", russian: "Как Вы?", transliteration: "Kak Vy?", type: "formal",
+            audio: "/audio/basic/greetings/howAreYou(formal).mp3"
+        },
+        { english: "What's your name?", russian: "Как тебя зовут?", transliteration: "Kak tebya zovut?", type: "informal",
+            audio: "/audio/basic/greetings/whatIsYourName(informal).mp3"
+        },
+        { english: "What's your name?", russian: "Как Вас зовут?", transliteration: "Kak Vas zovut?", type: "formal",
+            audio: "/audio/basic/greetings/whatIsYourName(formal).mp3"
+        },
+        { english: "Nice to meet you", russian: "Приятно познакомиться", transliteration: "Priyatno poznakomit'sya",
+            audio: "/audio/basic/greetings/niceToMeetYou.mp3"
+        },
+        { english: "I don't understand", russian: "Я не понимаю", transliteration: "Ya ne ponimayu",
+            audio: "/audio/basic/greetings/IDon'tUnderstand.mp3"
+        },
+        { english: "Could you repeat that?", russian: "Не могли бы вы повторить это?", transliteration: "Ne mogli by vy povtorit eto?", type: "formal",
+            audio: "/audio/basic/greetings/couldYouRepeatThat(formal).mp3"
+        },
+        { english: "Could you repeat that?", russian: "Можешь повторить?", transliteration: "Mozhesh' povtorit?", type: "informal",
+            audio: "/audio/basic/greetings/couldYouRepeatThat(informal).mp3"
+        },
+        { english: "Where is the bathroom?", russian: "Где туалет?", transliteration: "Gde tualet?",
+            audio: "/audio/basic/greetings/whereIsTheToilet.mp3"
+        },
     ],
-
+    
     numbers: [
         { english: "1", russian: "Один", transliteration: "Odin" },
         { english: "2", russian: "Два", transliteration: "Dva" },

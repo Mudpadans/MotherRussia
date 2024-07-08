@@ -40,6 +40,7 @@ function Translator() {
     } catch (error) {
       setError('Failed to fetch error.')
       console.error('Fetch error:', error)
+      setIsAudioLoading(false)
     } finally {
       console.log("loading")
       setIsLoading(false)
@@ -48,7 +49,7 @@ function Translator() {
 
   const handleAudio = () => {
     if (audioRef.current) {
-      let newSrc = `/audio?cb=${Date.now()}`;
+      let newSrc = `/dynamic-audio?cb=${Date.now()}`;
       audioRef.current.src = newSrc;
       audioRef.current.load()
     }
@@ -67,7 +68,6 @@ function Translator() {
             ></textarea>
             <button onClick={handleTranslate} id="translator-btn">Translate</button>
             {isLoading && <p>Translating...</p>} 
-            
           </div>
       </section>
       <section>
